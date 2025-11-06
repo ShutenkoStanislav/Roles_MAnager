@@ -37,5 +37,26 @@ class Task(models.Model):
 
     def __str__(self):
          return f"{self.title} ({self.status})"
+    
+
+class Post(models.Model):
+    name = models.CharField(max_length=50)
+    info = models.CharField(max_length=256)
+    date = models.DateField()
+
+    def __str__(self):
+        return self.name()
+    
+class Comment(models.Model):
+    text = models.CharField(max_length=512)
+    author = models.CharField(max_length=50)  
+    date = models.DateField()
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Comment by {self.author} on {self.post.name}"
+
+
+
 
 
